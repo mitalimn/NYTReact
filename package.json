@@ -1,0 +1,28 @@
+{
+  "name": "nytreact",
+  "version": "1.0.0",
+  "description": "React based NY Times Article Scrubber using mongo react router",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitalimn/NYTReact.git"
+  },
+  "keywords": [
+    "NYT",
+    "React",
+    "app"
+  ],
+  "author": "Mitali Naik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mitalimn/NYTReact/issues"
+  },
+  "homepage": "https://github.com/mitalimn/NYTReact#readme",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
