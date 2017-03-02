@@ -2,10 +2,12 @@
 var React = require("react");
 
 var News = React.createClass({
-    // getInitialState: function(){
-    //     //return
+    getInitialState: function(){
+        return {
+          test: 123
+        };
 
-    // },
+    },
 // handleClick: function(){
 
 // },

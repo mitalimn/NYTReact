@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Make public a static dir
-app.use(express.static(process.cwd() + "public"));
+app.use(express.static(process.cwd() + "/public"));
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/nytreact");
@@ -31,6 +31,12 @@ db.on("error", function(error) {
 db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
+
+//routes
+
+app.get('/', function(req, res){
+  res.sendFile(__dirname +'/public/index.html');
+})
 
 // Listen on port 8000
 app.listen(8000, function() {
