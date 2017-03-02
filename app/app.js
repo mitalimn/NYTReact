@@ -6,4 +6,4 @@ var ReactDOM = require("react-dom");
 var News = require("./components/News");
 
 // This code here allows us to render our main component (in this case Form)
-ReactDOM.render(<Form />, document.getElementById("app"));
+ReactDOM.render(<News />, document.getElementById("app"));
