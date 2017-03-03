@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
+var Article = require("./models/Article.js")
 // Initialize Express
 var app = express();
 
@@ -36,7 +37,7 @@ db.once("open", function() {
 
 app.get('/', function(req, res){
   res.sendFile(__dirname +'/public/index.html');
-})
+});
 
 // Listen on port 8000
 app.listen(8000, function() {

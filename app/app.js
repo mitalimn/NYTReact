@@ -3,7 +3,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 
 // Include the News Component
-var News = require("./components/News");
+var Main = require("./components/Main");
 
 // This code here allows us to render our main component (in this case Form)
-ReactDOM.render(<News />, document.getElementById("app"));
+ReactDOM.render(<Main />, document.getElementById("app"));
