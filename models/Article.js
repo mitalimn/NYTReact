@@ -8,8 +8,7 @@ var ArticleSchema = new Schema({
   // title is a required string
   title: {
     type: String,
-    required: true,
-    unique : true
+    required: true
   },
   date :{
       type : String,

@@ -36,10 +36,50 @@ db.once("open", function() {
 //routes
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname +'/public/index.html');
+  res.sendFile(processs.cwd() + '/public/index.html');
+});
+//to get 
+app.get('/api/saved', function(req, res){
+  Article.find({}, function(err,docs){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.json(docs);
+    }
+  });
+});
+//to post
+app.post('/api/saved', function(req, res){
+  var entry = new Article(req.body);
+  entry.save(function(err, doc){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(docs);
+    }
+  });
 });
 
-// Listen on port 8000
-app.listen(8000, function() {
-  console.log("App running on port 8000!");
+//to delete 
+
+app.post('/api/delete/:articleID', function(req, res){
+  console.log();
+  Article.findByIdAndRemove(req.params.articleId, function(err, del){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("deleted");
+    }
+  });
+});
+
+
+
+var PORT = process.env.PORT || 8000;
+
+app.listen(PORT, function() {
+  console.log("App running on port " +PORT +"!");
 });
