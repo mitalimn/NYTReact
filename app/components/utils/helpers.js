@@ -46,3 +46,35 @@ var articleQuery = function(topic, beginYear, endYear){
   });
 
 }
+
+// API Post Request Function
+var apiSave = function(articleObj){
+
+  // Get API Post URL (this allows it to work in both localhost and heroku)
+  var apiURL = window.location.origin + '/api/saved';
+
+  // Create a JavaScript *Promise*
+  return new Promise(function (fulfill, reject){
+
+    // Re-format the article Object to match the Mongo Model (ie we need to take off the the id)
+    var params = new URLSearchParams();
+    params.append("title", articleObj.title);
+    params.append("date", articleObj.date);
+    params.append("url", articleObj.url);
+    axios.post(apiURL, params).then(function(response){
+
+      // Error handling / fullfil promise if successful query
+      if(response){
+        fulfill(response);
+      }
+      else{
+        reject("");
+      }
+      
+    })
+
+  });
+  
+}
+
+
