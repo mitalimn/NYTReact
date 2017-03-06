@@ -50,21 +50,21 @@ var Form = React.createClass({
               <div className="panel-body">
                   <form role="form" onSubmit={this.handleSubmit} >  
                     <div className="form-group">
-                      <label for="topic">Enter Search Term</label>
+                      <label >Enter Search Term</label>
                        <input type="text" className="form-control text-center"
                         id="topic" value={this.state.topic}  onChange={this.handleTopicChange}
                 required />
                     </div>
 
                     <div className="form-group">
-                      <label for="startyear">Start Year</label>
+                      <label >Start Year</label>
                        <input type="text" className="form-control" id="startyear" 
                        value={this.state.startyear}  onChange={this.handleStartYearChange}
                        required />
                     </div>
 
                     <div className="form-group">
-                      <label for="endyear">End Year</label>
+                      <label >End Year</label>
                        <input type="text" className="form-control" id="endyear"
                        value={this.state.endyear}  onChange={this.handleEndYearChange}
                 required  />

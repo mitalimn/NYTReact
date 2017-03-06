@@ -9,15 +9,15 @@ var Result = React.createClass({
     },
 
     render: function(){
-        (
-            <div className="panel panel-default">
+        return  (      
+           <div className="panel panel-default">
               <div className="panel-heading">
                 <h3 className="panel-title text-center">Results</h3>
               </div>
               <div className="panel-body">
                   Article title goes here 
-                    <button class="btn btn-default pull-right">Save</button>
-                    <div class="clearfix"></div>
+                    <button className="btn btn-default pull-right">Save</button>
+                    
               </div>
             </div>
         );
