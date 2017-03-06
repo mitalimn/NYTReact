@@ -16,8 +16,8 @@ var Save = React.createClass({
               </div>
               <div className="panel-body">
                   Article title goes here 
-                    <button class="btn btn-default pull-right">Remove</button>
-                    <div class="clearfix"></div>
+                    <button className="btn btn-default pull-right">Remove</button>
+                    <div className="clearfix"></div>
               </div>
             </div>
         );

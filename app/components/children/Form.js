@@ -17,13 +17,13 @@ var Form = React.createClass({
 
    handleStartYearChange: function(event) {
 
-    this.setState({ topic: event.target.value });
+    this.setState({ startyear: event.target.value });
 
   },
 
    handleEndYearChange: function(event) {
 
-    this.setState({ topic: event.target.value });
+    this.setState({ endyear: event.target.value });
 
   },
 
@@ -50,22 +50,22 @@ var Form = React.createClass({
               <div className="panel-body">
                   <form role="form" onSubmit={this.handleSubmit} >  
                     <div className="form-group">
-                      <label >Enter Search Term</label>
-                       <input type="text" className="form-control text-center"
+                     
+                       <input type="text" className="form-control " placeholder="Enter Search Term"
                         id="topic" value={this.state.topic}  onChange={this.handleTopicChange}
                 required />
                     </div>
 
                     <div className="form-group">
-                      <label >Start Year</label>
-                       <input type="text" className="form-control" id="startyear" 
+                    
+                       <input type="text" className="form-control" id="startyear"  placeholder="Enter Start year"
                        value={this.state.startyear}  onChange={this.handleStartYearChange}
                        required />
                     </div>
 
                     <div className="form-group">
-                      <label >End Year</label>
-                       <input type="text" className="form-control" id="endyear"
+                     
+                       <input type="text" className="form-control" id="endyear" placeholder="Enter End Year"
                        value={this.state.endyear}  onChange={this.handleEndYearChange}
                 required  />
                     </div>
