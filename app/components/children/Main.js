@@ -35,7 +35,7 @@ var Main = React.createClass({
     
     componentDidUpdate: function(prevState){
         if(this.state.searchTerms != prevState.searchTerms){
-            articleQuery(this.state.searchTerms[0], this.state.searchTerms[1], this.state.searchTerms[2])
+            helpers.articleQuery(this.state.searchTerms[0], this.state.searchTerms[1], this.state.searchTerms[2])
             .then(function(data){
                 this.setState({apiResults: data})
             }.bind(this));
@@ -44,9 +44,7 @@ var Main = React.createClass({
 
 render: function(){
     return(
-          <div className="container">
- 
- 
+          <div className="container"> 
           <div>
             <h2>New York Times Article Scrubber</h2>
             <p><em>FInd news article bassed on the search term !</em></p>
