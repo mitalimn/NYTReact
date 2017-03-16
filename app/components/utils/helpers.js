@@ -127,10 +127,6 @@ var apiDelete = function(deleteArticleId){
 
 }
 
-
-
-
-
 // Export all helper functions
 module.exports = {
  articleQuery,

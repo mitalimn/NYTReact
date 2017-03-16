@@ -5,10 +5,13 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var cors = require('cors');
 
 var Article = require("./models/Article.js")
 // Initialize Express
 var app = express();
+// app.use(express.methodOverride());
+app.use(cors());
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
@@ -62,19 +65,47 @@ app.post('/api/saved', function(req, res){
   });
 });
 
+// app.all('*', function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'accept, content-type, x-parse-application-id, x-parse-rest-api-key, x-parse-session-token');
+//      // intercept OPTIONS method
+//     if ('OPTIONS' == req.method) {
+//       res.send(200);
+//     }
+//     else {
+//       next();
+//     }
+// });
+
+app.all('*', function(req, res, next){
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers',
+   'accept, origin, content-type, x-parse-application-id, x-parse-rest-api-key, x-parse-session-token');
+//     
+})
+
+// app.use(function(req, res, next){
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+//   res.header('Access-Control-Allow-Headers',
+//    'accept, content-type, x-parse-application-id, Origin, x-parse-rest-api-key, x-requested-with, x-parse-session-token');
+// })
+
 //to delete 
 
-app.post('/api/delete/:articleID', function(req, res){
-  console.log();
-  Article.findByIdAndRemove(req.params.articleId, function(err, del){
-    if(err){
-      console.log(err);
-    }
-    else{
-      console.log("deleted");
-    }
-  });
-});
+// app.post('/api/delete/:articleID', function(req, res){
+//   console.log();
+//   Article.findByIdAndRemove(req.params.articleId, function(err, del){
+//     if(err){
+//       console.log(err);
+//     }
+//     else{
+//       console.log("deleted");
+//     }
+//   });
+// });
 
 
 

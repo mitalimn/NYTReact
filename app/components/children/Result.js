@@ -44,7 +44,7 @@ var Result = React.createClass({
                          that.state.arrayofArt.push({
                              id: search.id,
                              title: search.headline.main,
-                             date: search.pub.date,
+                             date: search.pub_date,
                              url: search.web_url
                          });
 
@@ -53,7 +53,7 @@ var Result = React.createClass({
                                   <div className="input-group">
                                         <div type="text" className="form-control">
                                             <a href="{search.web_url}" target="_new">{search.headline.main}</a>
-                                            {search.pub.date}
+                                            {search.pub_date}
                                         </div>
                                          <span className="input-group-btn">
                                         <button type="button" className="btn btn-default pull-right" onClick={that.handleSave}
