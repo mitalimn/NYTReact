@@ -1,73 +1,99 @@
+// Include React
 var React = require("react");
 
-// Helper for making AJAX requests to our API
-var helpers = require("../utils/helpers");
+// Requiring our helper for making API calls
+var helpers = require("../utils/helpers.js");
 
-
+// Create the Search Component
 var Result = React.createClass({
-    getInitialState: function(){
-        return {
-            arrayofArt : []
-        };
-    },
 
-    handleSave: function(e){
-        var articleId = e.target.value;
-        var artObj;
-        for(var i=0; i<this.state.arrayofArt.length;i++){
-            if(this.state.arrayofArt[i].id == articleId){
-                 artObj = this.state.arrayofArt[i];
-            }           
-        }
+  // Here we set a generic state
+  getInitialState: function() {
+    return {
+      arrayOfArticles: []
+    };
+  },
 
-        var that= this;
-        helpers.apiSave(artObj).then(function(){
-            helpers.apiGet().then(function(query){
-                that.props.resetdbRes(query.data);
-            })
-            
-        }.bind(this))
-},
+  _handleSave: function(event){
 
-    render: function(){
-        var that= this;
+    // Collect the clicked article's id
+    var articleId = event.target.value;
 
-        return  (      
-           <div className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title text-center">Results</h3>
-              </div>
-              <div className="panel-body">
-                  Article title goes here 
-                  <ul className="list-group col-md-8">
-                     {this.props.apiResults.map(function(search, i){
-                         that.state.arrayofArt.push({
-                             id: search.id,
-                             title: search.headline.main,
-                             date: search.pub_date,
-                             url: search.web_url
-                         });
-
-                         return(
-                             <li key= "search.id" className="list-group-item">
-                                  <div className="input-group">
-                                        <div type="text" className="form-control">
-                                            <a href="{search.web_url}" target="_new">{search.headline.main}</a>
-                                            {search.pub_date}
-                                        </div>
-                                         <span className="input-group-btn">
-                                        <button type="button" className="btn btn-default pull-right" onClick={that.handleSave}
-                                        value={search.id}>Save</button>
-                                        </span>
-                                        </div>
-                                        </li>
-                         );
-                     })}
-                      </ul>                   
-              </div>
-            </div>
-        );
+    // Collect the clicked article's attributes
+    var saveArticleObj;
+    for(var i=0; i<this.state.arrayOfArticles.length; i++){
+      if(this.state.arrayOfArticles[i].id == articleId){
+        saveArticleObj = this.state.arrayOfArticles[i];
+      }
     }
+
+    // Copy "this" into "that" so that component is accessible inside the functions.
+    var that = this;
+
+    // Send this data to the API endpoint to save it to Mongo
+    helpers.apiSave(saveArticleObj).then(function(){
+
+      // Re-set the Mongo data to account for a change in database (i.e. added an article)
+      // By Querying Mongo Again for new Data, this will re-render the components in saved.jsx
+      helpers.apiGet().then(function(query){
+        that.props._resetMongoResults(query.data);
+      });
+
+
+    }.bind(this))
+
+  },
+
+  // Here we render the Search Results Panel
+  render: function() {
+
+    // http://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method
+    var that = this;
+
+    return (
+
+      <div className="panel panel-default">
+
+        <div className="panel-heading">
+          <h3 className="panel-title text-center" style={ {fontSize: "20px"} }><i><b>Results</b></i></h3>
+        </div>
+
+        <div className="panel-body">
+          <ul className="list-group col-md-8 col-md-offset-2">
+
+            {/* ++++++++++++++++++++++++++++++++ ITERATE HERE ++++++++++++++++++++++++++++++++ */}
+            {/* Here we use a map function to loop through an array in JSX */}
+            {this.props.apiResults.map(function(search, i) {
+              // Build array of articles
+              that.state.arrayOfArticles.push({
+                id: search._id,
+                title: search.headline.main,
+                date: search.pub_date,
+                url: search.web_url
+              });
+              return (
+                <li key={search._id} className="list-group-item" style={ {borderWidth: "0px"} }>
+                  <div className="input-group">
+                    <div type="text" className="form-control">
+                      <b><a href={search.web_url} target="_new" style={ {color: "black"} }>{search.headline.main}</a></b>
+                      <i> {search.pub_date.substring(0, 10)}</i>
+                    </div>       
+                    <span className="input-group-btn">
+                      <button className="btn btn-success" type="button" onClick={that._handleSave} value={search._id}>Save</button>
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
+
+          </ul>
+        </div>
+      </div>
+
+    );
+  }
 });
 
+
+// Export the component back for use in Main file
 module.exports = Result;
